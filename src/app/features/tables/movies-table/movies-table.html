@@ -1,0 +1,49 @@
+<div class="table-card">
+  <mat-form-field appearance="outline" class="filter">
+    <mat-label>Buscar película</mat-label>
+    <input
+      matInput
+      (keyup)="onFilter($any($event.target).value)"
+      placeholder="Ej: Inception, Matrix..."
+      autocomplete="off"
+    />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-progress-bar *ngIf="loading()" mode="indeterminate"></mat-progress-bar>
+
+  <table mat-table [dataSource]="data()" matSort (matSortChange)="onSortChange($event)">
+    <ng-container matColumnDef="poster">
+      <th mat-header-cell *matHeaderCellDef aria-label="Póster"></th>
+      <td mat-cell *matCellDef="let m">
+        <img *ngIf="m.posterUrl" [src]="m.posterUrl" alt="{{ m.title }}" />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="title">Título</th>
+      <td mat-cell *matCellDef="let m">{{ m.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="releaseDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="releaseDate">Estreno</th>
+      <td mat-cell *matCellDef="let m">{{ m.releaseDate | date : 'mediumDate' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="rating">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header="rating">Rating</th>
+      <td mat-cell *matCellDef="let m">{{ m.rating | number : '1.1-1' }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    [length]="total()"
+    [pageSize]="20"
+    [pageSizeOptions]="[10, 20, 40]"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>

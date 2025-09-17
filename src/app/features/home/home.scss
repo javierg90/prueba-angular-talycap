@@ -1,0 +1,41 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.hero {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--md-sys-color-primary), transparent 70%),
+    transparent
+  );
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: var(--elev);
+}
+
+.view-toggle {
+  padding: 0 16px;
+  display: flex;
+  justify-content: center;
+}
+
+mat-button-toggle-group {
+  width: 100%;
+  background: var(--md-sys-color-surface-container-high);
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: var(--elev-sm);
+}
+
+mat-button-toggle {
+  width: 50%;
+}
+
+.content {
+  display: grid;
+  gap: 16px;
+}

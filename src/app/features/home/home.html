@@ -1,0 +1,18 @@
+<section class="container">
+  <header class="hero">
+    <h1>Prueba Angular Talycap</h1>
+    <p>Películas populares y clima LATAM — Javier Garcia Mora</p>
+  </header>
+
+  <div class="view-toggle">
+    <mat-button-toggle-group [value]="view()" (change)="view.set($event.value)">
+      <mat-button-toggle value="movies"><mat-icon>movie</mat-icon> Películas</mat-button-toggle>
+      <mat-button-toggle value="weather"><mat-icon>cloud</mat-icon> Clima</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div class="content">
+    <app-movies-table *ngIf="view() === 'movies'"></app-movies-table>
+    <app-weather-table *ngIf="view() === 'weather'"></app-weather-table>
+  </div>
+</section>

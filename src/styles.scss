@@ -5,26 +5,39 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 
-$theme: mat.define-theme(
-  (
-    color: (
-      theme-type: light,
-      primary: mat.$cyan-palette,
-      secondary: mat.$indigo-palette,
-    ),
-    density: (
-      scale: -2,
+html {
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: (
+        scale: -2,
+      ),
     )
-    // compacto,
-  )
-);
-
-:root {
-  @include mat.all-component-themes($theme);
-  --elev: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --elev-sm: 0 4px 16px rgba(0, 0, 0, 0.06);
+  );
 }
 
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+}
+
+/* You can add global styles to this file, and also import other style files */
 html,
 body {
   height: 100%;
@@ -34,3 +47,9 @@ body {
   font-family: Inter, Roboto, 'Helvetica Neue', Arial, system-ui, sans-serif;
   background: color-mix(in oklab, white, #f5f7fb 10%);
 }
+
+// :root {
+//   @include mat.all-component-themes();
+//   --elev: 0 8px 24px rgba(0, 0, 0, 0.08);
+//   --elev-sm: 0 4px 16px rgba(0, 0, 0, 0.06);
+// }

@@ -1,59 +1,128 @@
-# PruebaAngularTalycap
+# Prueba Angular – Talycap (Angular 20 + SSR + Material)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.2.
+Aplicación de ejemplo con **Angular 20**, **Standalone Components**, **Angular Material 20 (MDC)** y **Server-Side Rendering (SSR)**.  
+Muestra dos tablas (Películas y Clima) con **búsqueda**, **paginación** y **ordenamiento** al hacer clic en la cabecera.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Requisitos previos
 
-```bash
-ng serve
+- **Node.js** LTS (≥18.19 o 20.x)
+- (Opcional) **Angular CLI** 20:
+  ```bash
+  npm i -g @angular/cli@^20
+  ```
+
+---
+
+## 📦 Instalación
+
+1. Clonar o descargar este repositorio:
+
+   ```bash
+   git clone https://github.com/javierg90/prueba-angular-talycap
+   cd prueba-angular-talycap
+   ```
+
+2. Instalar dependencias:
+   ```bash
+   npm i
+   ```
+
+---
+
+## 🔑 Configuración de entornos (API Keys)
+
+La app consume **TMDB** (películas) y **OpenWeather** (clima). Configura tus llaves en:
+
+- `src/environments/environment.development.ts` (desarrollo)
+- `src/environments/environment.ts` (producción)
+
+Ejemplo:
+
+```ts
+export const environment = {
+  production: false,
+  tmdb: {
+    apiUrl: 'https://api.themoviedb.org/3',
+    apiKey: 'aa530053e6afba40bb49919cb03127fc',
+    imageBase: 'https://image.tmdb.org/t/p/w200',
+  },
+  openWeather: {
+    apiUrl: 'https://api.openweathermap.org/data/2.5',
+    apiKey: '9b45e5df2919c27e8910667fa267aabe',
+    units: 'metric',
+    iconBase: 'https://openweathermap.org/img/wn',
+  },
+};
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 📝 Scripts disponibles
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+En `package.json`:
 
-```bash
-ng generate component component-name
-```
+| Script                                     | Descripción                                                                                     |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------- |
+| `npm start`                                | Levanta la app en **modo desarrollo** (Angular CLI, render en navegador).                       |
+| `npm run build`                            | Construye la app (browser + server para SSR).                                                   |
+| `npm run watch`                            | Compila en modo watch (sin servidor).                                                           |
+| `npm test`                                 | Ejecuta las **pruebas unitarias** (Jasmine + Karma).                                            |
+| `npm run serve:ssr:prueba-angular-talycap` | Inicia el **servidor SSR** en producción desde `dist/prueba-angular-talycap/server/server.mjs`. |
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## 🖥️ Ejecución en desarrollo (sin SSR)
 
 ```bash
-ng build
+npm start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Por defecto: <http://localhost:4200>  
+Ideal para iterar UI rápido.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 🌐 Ejecución SSR (producción)
+
+1. Compilar:
+   ```bash
+   npm run build
+   ```
+2. Servir SSR:
+   ```bash
+   npm run serve:ssr:prueba-angular-talycap
+   ```
+
+Por defecto se sirve en **http://localhost:4000** (puerto configurable con `PORT=5000 npm run serve:ssr:prueba-angular-talycap`).  
+La respuesta inicial ya viene **renderizada desde el servidor** y luego el cliente hidrata.
+
+---
+
+## 🧪 Pruebas unitarias
 
 ```bash
-ng test
+npm test
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+Ejecuta las pruebas en modo interactivo (Jasmine + Karma). Para correr una sola vez en headless:
 
 ```bash
-ng e2e
+ng test --no-watch --no-progress --browsers=ChromeHeadless
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Hay specs para **MoviesService** y **WeatherService** usando `HttpClientTestingModule` y `HttpTestingController`.
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🛠️ Stack técnico
+
+- **Angular 20** + **Standalone Components**
+- **@angular/ssr** con **hidratación** y **Transfer Cache**
+- **Angular Material 20 (MDC)** para tablas, paginación, sort y búsqueda
+- **HttpClient con Fetch** (SSR-friendly)
+- **Pruebas** con Jasmine + Karma y utilitarios de testing HTTP
+- **Tema Material 2025** definido en `styles.scss`
+
+---

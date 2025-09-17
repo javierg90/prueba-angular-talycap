@@ -1,0 +1,29 @@
+.table-card {
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: var(--elev);
+  background: var(--md-sys-color-surface);
+}
+
+.filter {
+  width: clamp(260px, 40vw, 360px);
+  margin-bottom: 12px;
+}
+
+.mat-mdc-header-row {
+  background: #cbd2e7;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+table {
+  width: 100%;
+}
+
+img {
+  margin-top: 6px;
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+}
